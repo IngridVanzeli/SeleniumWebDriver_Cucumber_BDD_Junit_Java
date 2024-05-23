@@ -1,0 +1,43 @@
+name: Snoke Tests - PR
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  RunTest:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clonar o projeto
+      uses: actions/checkout@v4
+
+    - name: Instalar o java 20
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'adopt'
+        java-version: '20'
+        cache: 'maven'
+
+    - name: Instalar o Firefox
+      uses: browser-actions/setup-firefox@v1
+
+    - name: Instalar o Geckodriver
+      uses: browser-actions/setup-geckodriver@latest
+      with:
+         token: ${{ secrets.GITHUB_TOKEN }}
+    - run: geckodriver --version
+
+    - name: Excutar os testes
+      run: mvn test -Dtest=RunCucumber -Dbrowser=firefox-ci
+
+    - name: Gerar relatorios
+      if: always()
+      run: mvn cluecumber-report:reporting
+
+    - name: Arquivar pasta formated-report
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: report_tests
+        path: '**/formates-report/'
