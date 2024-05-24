@@ -25,7 +25,7 @@ jobs:
 
       - name: Instalar o GeckoDriver
         uses: browser-actions/setup-geckodriver@latest
-      - run: geckodriver --version
+        run: geckodriver --version
 
       - name: Run Test
         run: mvn test -Dtest=RunCucumber -Dbrowser=chrome-ci
