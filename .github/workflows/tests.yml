@@ -22,7 +22,6 @@ jobs:
 
       - name: Instalar FireFox
       - uses: browser-actions/setup-firefox@v1
-      - run: firefox --version
 
       - name: Instalar o GeckoDriver
         uses: browser-actions/setup-geckodriver@latest
@@ -31,11 +30,11 @@ jobs:
       - name: Run Test
         run: mvn test -Dtest=RunCucumber -Dbrowser=chrome-ci
 
-      - name: Gerar relatório
+      - name: Gerar relatórios
         if: always()
         run: mvn cluecumber-report:reporting
 
-      - name: Arquivar relatório
+      - name: Arquivar relatórios
         if: always()
         uses: actions/upload-artifact@v3
         with:
