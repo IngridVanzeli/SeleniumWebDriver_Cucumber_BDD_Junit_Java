@@ -12,10 +12,10 @@ jobs:
       - name: Clonar o projeto
         uses: actions/checkout@v4
 
-      - name: Instalar Java 20
+      - name: Instalar Java 11
         uses: actions/checkout@v4
         with:
-          java-version: '20'
+          java-version: '11'
           distribution: 'adopt'
           cache: 'maven'
 
