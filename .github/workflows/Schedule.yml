@@ -1,0 +1,40 @@
+name: Schedule Tests - PR
+
+on:
+  schedule:
+    - cron:  '0 20 * * 5'
+
+jobs:
+  RunTest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar o projeto
+        uses: actions/checkout@v4
+
+      - name: Instalar Java 11
+        uses: actions/checkout@v4
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          cache: 'maven'
+
+      - name: Instalar FireFox
+        uses: browser-actions/setup-firefox@v1
+
+      - name: Instalar o GeckoDriver
+        uses: browser-actions/setup-geckodriver@latest
+
+      - name: Run Test
+        run: mvn test -Dtest=RunCucumber -Dbrowser=firefox-ci
+
+      - name: Gerar relatórios
+        if: always()
+        run: mvn cluecumber-report:reporting
+
+      - name: Arquivar relatórios
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: report-tests
+          path: '**/formated-report/'
