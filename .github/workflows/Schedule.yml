@@ -26,7 +26,7 @@ jobs:
         uses: browser-actions/setup-geckodriver@latest
 
       - name: Run Test
-        run: mvn test -Dtest=RunCucumber -Dbrowser=firefox-ci
+        run: mvn test -Dtest=RunCucumber -Dbrowser=firefox -Dcucumber.options="--tags ~@ignore"
 
       - name: Gerar relatórios
         if: always()
