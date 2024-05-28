@@ -46,7 +46,7 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_COLOR: ${{ job.status }}
           SLACK_ICON: https://imagepng.org/wp-content/uploads/2019/12/check-icone-scaled.png
-          SLACK_MESSAGE: "Sucesso na excução de testes do PR :white_check_mark"
+          SLACK_MESSAGE: "Sucesso na excução de testes do PR "
           SLACK_TITLE: "Teste com Sucesso"
           SLACK_USERNAME: SUCESSO
 
@@ -57,6 +57,6 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_COLOR: ${{ job.status }}
           SLACK_ICON: https://www.pngwing.com/pt/free-png-vohup
-          SLACK_MESSAGE: "Falha na excução de testes do PR :fire"
+          SLACK_MESSAGE: "Falha na excução de testes do PR "
           SLACK_TITLE: "Teste com Falha"
           SLACK_USERNAME: FALHA
